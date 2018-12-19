@@ -87,7 +87,7 @@ Socket.prototype.open = function (host, port, success, error, withSsl) {
             error(errorMessage);
         },
         CORDOVA_SERVICE_NAME,
-        withSsl ? "openSsl" : "open",
+        "open",
         [ this.socketKey, host, port ]);
 };
 
