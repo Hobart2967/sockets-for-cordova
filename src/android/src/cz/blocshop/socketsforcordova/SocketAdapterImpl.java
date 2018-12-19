@@ -20,6 +20,8 @@ package cz.blocshop.socketsforcordova;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -31,7 +33,7 @@ import java.util.concurrent.Future;
 public class SocketAdapterImpl implements SocketAdapter {
     
     private final int INPUT_STREAM_BUFFER_SIZE = 16 * 1024;
-    private final Socket socket;
+    private Socket socket;
     
     private Consumer<Void> openEventHandler;
     private Consumer<String> openErrorEventHandler;
@@ -46,6 +48,24 @@ public class SocketAdapterImpl implements SocketAdapter {
         this.executor = Executors.newSingleThreadExecutor();
     }
 
+    @Override
+    public void openSsl(final String host, final int port) {
+	    this.executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+			SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+			this.socket = (SSLSocket) factory.createSocket(host, port);
+			invokeOpenEventHandler();
+			submitReadTask();
+		} catch (IOException e) {
+			Logging.Error(SocketAdapterImpl.class.getName(), "Error during connecting of ssl socket", e.getCause());
+			invokeOpenErrorEventHandler(e.getMessage());
+		}
+       	    }
+        });
+    }
+	
     @Override
     public void open(final String host, final int port) {
         this.executor.submit(new Runnable() {
