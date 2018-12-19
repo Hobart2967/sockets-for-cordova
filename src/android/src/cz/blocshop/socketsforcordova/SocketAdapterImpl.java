@@ -49,7 +49,7 @@ public class SocketAdapterImpl implements SocketAdapter {
     }
 
     @Override
-    public void openSSl(String host, int port) {      
+    public void openSsl(String host, int port) {      
 	    this.executor.submit(new Runnable() {
             @Override
             public void run() {
