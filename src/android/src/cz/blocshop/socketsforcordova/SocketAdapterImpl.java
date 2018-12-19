@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.SSLSocketFactory;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
