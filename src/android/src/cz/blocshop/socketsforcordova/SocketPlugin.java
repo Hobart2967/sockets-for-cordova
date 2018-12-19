@@ -40,7 +40,7 @@ public class SocketPlugin extends CordovaPlugin {
 	public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
 
 		if (action.equals("open")) {
-			this.open(args, callbackContext, false);
+			this.open(args, callbackContext);
 		} else if (action.equals("write")) {
 			this.write(args, callbackContext);
 		} else if (action.equals("shutdownWrite")) {
