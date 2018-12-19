@@ -41,8 +41,6 @@ public class SocketPlugin extends CordovaPlugin {
 
 		if (action.equals("open")) {
 			this.open(args, callbackContext, false);
-		} else if (action.equals("openSsl")) {
-			this.open(args, callbackContext, true);
 		} else if (action.equals("write")) {
 			this.write(args, callbackContext);
 		} else if (action.equals("shutdownWrite")) {
@@ -58,10 +56,11 @@ public class SocketPlugin extends CordovaPlugin {
 		return true;
 	}
 	
-	private void open(CordovaArgs args, CallbackContext callbackContext, boolean withSsl) throws JSONException {
+	private void open(CordovaArgs args, CallbackContext callbackContext) throws JSONException {
 		String socketKey = args.getString(0);
 		String host = args.getString(1);
 		int port = args.getInt(2);
+		boolean withSsl = args.getBoolean(3);
 		
 		SocketAdapter socketAdapter = new SocketAdapterImpl();
 		socketAdapter.setCloseEventHandler(new CloseEventHandler(socketKey));
