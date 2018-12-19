@@ -49,19 +49,19 @@ public class SocketAdapterImpl implements SocketAdapter {
     }
 
     @Override
-    public void openSsl(final String host, final int port) {
+    public void openSSl(String host, int port) {      
 	    this.executor.submit(new Runnable() {
             @Override
             public void run() {
-                try {
-			SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-			this.socket = (SSLSocket) factory.createSocket(host, port);
-			invokeOpenEventHandler();
-			submitReadTask();
-		} catch (IOException e) {
-			Logging.Error(SocketAdapterImpl.class.getName(), "Error during connecting of ssl socket", e.getCause());
-			invokeOpenErrorEventHandler(e.getMessage());
-		}
+              try {
+                SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+                socket = (SSLSocket) factory.createSocket(host, port);
+                invokeOpenEventHandler();
+                submitReadTask();
+              } catch (IOException e) {
+                Logging.Error(SocketAdapterImpl.class.getName(), "Error during connecting of ssl socket", e.getCause());
+                invokeOpenErrorEventHandler(e.getMessage());
+              }
        	    }
         });
     }
