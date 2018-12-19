@@ -34,9 +34,11 @@ function Socket() {
     this.onError = null;
     this.socketKey = guid();
 }
-
 Socket.prototype.open = function (host, port, success, error) {
-
+    this.open(host, port, success, true);
+}
+Socket.prototype.open = function (host, port, success, error, withSsl) {
+    withSsl = withSsl || false;
     success = success || function() { };
     error = error || function() { };
 
@@ -85,7 +87,7 @@ Socket.prototype.open = function (host, port, success, error) {
             error(errorMessage);
         },
         CORDOVA_SERVICE_NAME,
-        "open",
+        withSsl ? "openSsl" : "open",
         [ this.socketKey, host, port ]);
 };
 
