@@ -1,0 +1,8 @@
+{
+  "name": "cordova-plugin-native-tcp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Hobart2967/sockets-for-cordova.git",
+  "author": "Hobart2967 <marco.klein@soneonline.com>",
+  "license": "MIT"
+}
